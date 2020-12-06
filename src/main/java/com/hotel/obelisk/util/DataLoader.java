@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -48,6 +49,7 @@ public class DataLoader {
         List <Room> rooms = new ArrayList<>();
         for (int i = 1; i <= 1000; i++) {
             double price = roomPriceMin + (roomPriceMax - roomPriceMin) * r.nextDouble();
+            price = Math.round(price * 100.0) / 100.0;
             Room room = new Room(false,price);
             rooms.add(room);
         }

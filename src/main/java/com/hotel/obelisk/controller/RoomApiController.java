@@ -16,12 +16,12 @@ import org.springframework.web.server.ResponseStatusException;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/rooms")
-public class RoomController {
+@RequestMapping("/api/rooms")
+public class RoomApiController {
     @Autowired
     private final RoomRepository roomRepo;
-    public RoomController(ReservationRepository resRepo,
-                          RoomRepository roomRepo) {
+    public RoomApiController(ReservationRepository resRepo,
+                             RoomRepository roomRepo) {
         this.roomRepo = roomRepo;
     }
 
@@ -40,6 +40,7 @@ public class RoomController {
         }
         return rooms;
     }
+
 
     @GetMapping("/{id}")
     public Room getRoomById(@PathVariable long id) {

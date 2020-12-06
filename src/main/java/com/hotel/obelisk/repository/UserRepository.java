@@ -15,6 +15,14 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends CrudRepository<User,Long> {
 
+    /** FOR UI **/
+    List<User> findAll();
+    @Query("SELECT u FROM User u WHERE u.enabled=true")
+    List<User> findAllEnabledUsers();
+    @Query("SELECT u FROM User u WHERE u.enabled=false")
+    List<User> findAllDisabledUsers();
+
+    /** FOR API **/
     Page<User> findAll(Pageable pageable);
     @Query("SELECT u FROM User u WHERE u.enabled=true")
     Page<User> findAllEnabledUsers(Pageable pageable); // pass a sorting method opbject when calling

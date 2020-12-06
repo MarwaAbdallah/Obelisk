@@ -101,7 +101,6 @@ public class Reservation {
     public void setBedding(Room bedding) {
 
         this.bedding = bedding;
-        this.bedding.setBooked(true);
     }
 
     @Override

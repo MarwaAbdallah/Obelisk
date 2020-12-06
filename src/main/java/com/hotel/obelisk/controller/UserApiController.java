@@ -13,21 +13,20 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
-@RequestMapping("/admin")
-public class UserController {
+@RequestMapping("/api/admin")
+public class UserApiController {
     /** IMPORTANT !! If class has > 1 Constructor, must add @Autowired
      above the method to indicate when a parameter represents
      a Spring bean to be autowired/injected.
      **/
     @Autowired
     private final UserRepository userRepo;
-    public UserController(UserRepository userRepo) {
+    public UserApiController(UserRepository userRepo) {
         this.userRepo = userRepo;
     }
 

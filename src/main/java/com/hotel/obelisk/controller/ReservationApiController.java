@@ -23,16 +23,16 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/reservation")
-public class ReservationController {
+@RequestMapping("/api/reservation")
+public class ReservationApiController {
     @Autowired
     private final ReservationRepository resRepo;
     private final RoomRepository roomRepo;
     private final UserRepository userRepo;
 
-    public ReservationController(ReservationRepository resRepo,
-                                 RoomRepository roomRepo,
-                                 UserRepository userRepo) {
+    public ReservationApiController(ReservationRepository resRepo,
+                                    RoomRepository roomRepo,
+                                    UserRepository userRepo) {
         this.resRepo = resRepo;
         this.roomRepo = roomRepo;
         this.userRepo = userRepo;
@@ -92,6 +92,7 @@ public class ReservationController {
             }
             Reservation reservation = new Reservation(fromD, toD,
                     user, room, customerEmail);
+            reservation.getBedding().setBooked(true);
             resRepo.save(reservation);
             return ResponseEntity.ok(reservation);
         }

@@ -16,7 +16,7 @@ public class Room {
     @GeneratedValue
     @JsonProperty("roomNo")
     private long roomNo;
-    @JsonProperty("isBooked")
+    //@JsonProperty("isBooked")
     private boolean isBooked;
     @JsonProperty("price")
     private double price;
