@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reservations</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+
+<h2>List of Reservations</h2>
+
+<table border="1">
+
+    <tr>
+        <th>Reservation Id</th>
+        <th>Check In</th>
+        <th>Check out</th>
+        <th>Customer Email</th>
+        <th>Room Number</th>
+        <th>Price Per Night</th>
+        <th>Total Price</th>
+    </tr>
+
+    <tr th:each="r : ${reservations}">
+        <td th:text="${r.resId}">id</td>
+        <td th:text="${r.getFromStayDate()}">Check In</td>
+        <td th:text="${r.getToStayDate()}">Check Out</td>
+        <td th:text="${r.getCustomerEmail()}">Customer Email</td>
+        <td th:text="${r.getBedding().getRoomNo()}">Room Number</td>
+        <td th:text="${r.getBedding().getPrice()}">Price Per Night</td>
+        <td th:text="${r.getPriceTotal()}">Total Price</td>
+    </tr>
+
+</table>
+
+</body>
+</html>
