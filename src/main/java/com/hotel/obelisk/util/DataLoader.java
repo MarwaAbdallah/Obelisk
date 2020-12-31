@@ -1,20 +1,17 @@
 package com.hotel.obelisk.util;
 
+import com.hotel.obelisk.model.Authorities;
 import com.hotel.obelisk.model.Reservation;
 import com.hotel.obelisk.model.Room;
 import com.hotel.obelisk.repository.ReservationRepository;
-import com.hotel.obelisk.repository.RoleRepository;
+import com.hotel.obelisk.repository.AuthorityRepository;
 import com.hotel.obelisk.repository.RoomRepository;
 import com.hotel.obelisk.repository.UserRepository;
-import com.hotel.obelisk.model.Role;
 import com.hotel.obelisk.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import java.math.BigDecimal;
-import java.math.RoundingMode;
-import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +22,12 @@ public class DataLoader {
     @Autowired
     private final UserRepository userRepo;
     @Autowired
-    private final RoleRepository roleRepo;
+    private final AuthorityRepository roleRepo;
     @Autowired
     private final ReservationRepository resRepo;
     @Autowired
     private final RoomRepository roomRepo;
-    public DataLoader(UserRepository userRepo, RoleRepository roleRepo,
+    public DataLoader(UserRepository userRepo, AuthorityRepository roleRepo,
                       ReservationRepository resRepo, RoomRepository roomRepo) {
         this.userRepo = userRepo;
         this.roleRepo = roleRepo;
@@ -40,9 +37,10 @@ public class DataLoader {
 
     @PostConstruct
     private void loadData() {
-        Role adm = new Role("Admin");
-        Role emp =new Role("Employee");
-        Role rescres = new Role("ReservationCreator");
+        Authorities adm = new Authorities("Administrator", "admin");
+        Authorities emp =new Authorities("Employee", "Joelle@obelisk.com");
+        Authorities rescres = new Authorities("ReservationCreator",
+                "servaccount@hbooking.com");
         Random r = new Random();
         double roomPriceMin = 50.0;
         double roomPriceMax = 350.0;
@@ -59,13 +57,13 @@ public class DataLoader {
                 emp,
                 rescres
         ));
-        User bob = new User("Bob@obelisk.com", true, emp);
-        User admin = new User("admin@admin.com", true, adm);
-        User alice = new User("Alice@admin.com", true, adm);
-        User joelle = new User("Joelle@obelisk.com.com", true, emp);
-        User srvacc = new User("servaccount@hbooking.com", true, rescres);
-        User steve = new User("steve@obelisk.com", false, emp);
-        User don = new User("don@obelisk.com.com", false, emp);
+        User bob = new User("Bob@obelisk.com", "password", 1);
+        User admin = new User("admin", "password",1);
+        User alice = new User("Alice@admin.com", "password",1);
+        User joelle = new User("Joelle@obelisk.com", "password",1);
+        User srvacc = new User("servaccount@hbooking.com", "password",1);
+        User steve = new User("steve@obelisk.com", "password",0);
+        User don = new User("don@obelisk.com.com", "password",0);
         userRepo.saveAll(List.of(
                 bob, admin, alice, joelle, srvacc, steve, don
         ));

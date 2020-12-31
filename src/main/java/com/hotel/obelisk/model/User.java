@@ -3,6 +3,8 @@ package com.hotel.obelisk.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Objects;
 
 @Entity
@@ -12,62 +14,59 @@ public class User {
     @GeneratedValue
     @JsonProperty("userId")
     private long userId;
-    @JsonProperty("email")
-    private String email;
+    @NotNull
+    @NotEmpty
+    @JsonProperty("username")
+    private String username;
+
     @JsonProperty("enabled")
-    private boolean enabled;
+    private int enabled;
+    @NotNull
+    @NotEmpty
+    private String password;
 //    private String role;
     //@ManyToOne(cascade = CascadeType.PERSIST)
-    @ManyToOne
-    @JoinColumn(name="roleId")
-    private Role role;
-
+    //@ManyToOne
+    //@JoinColumn(name="roleId")
+   // private Authorities role;
     public User(){}
-    public User(String email, boolean enabled, Role role) {
-        this.email = email;
+    public User(String username, String password, int enabled){
+        this.password = password;
+        this.username = username;
         this.enabled = enabled;
-        this.role = role;
+
     }
-    public User(String email, boolean enabled, String roleName) {
-        this.email = email;
+    public User(String username, String password, int enabled, Authorities authorities) {
+        this.username = username;
         this.enabled = enabled;
-        this.role = new Role("roleName");
     }
 
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public long getUserId() {
         return userId;
     }
 
-    public boolean isEnabled() {
-        return enabled;
-    }
 
-    public void setEnabled(boolean enabled) {
-        this.enabled = enabled;
-    }
 
     public void setUserId(long userId) {
         this.userId = userId;
     }
 
-    public Role getRole() {
-        return role;
+    public int getEnabled() {
+        return enabled;
     }
 
-    public void setRole(String roleName) {
-        this.role = new Role();
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
     }
-
-
 
     @Override
     public boolean equals(Object o) {
@@ -76,12 +75,12 @@ public class User {
         User user = (User) o;
         return userId == user.userId &&
                 enabled == user.enabled &&
-                email.equals(user.email) &&
-                role.equals(user.role);
+                Objects.equals(username, user.username) &&
+                Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, email, enabled, role);
+        return Objects.hash(userId, username, enabled, password);
     }
 }

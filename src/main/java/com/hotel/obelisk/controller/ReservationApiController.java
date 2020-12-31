@@ -3,7 +3,6 @@ package com.hotel.obelisk.controller;
 import com.hotel.obelisk.exceptions.ReservationNotFoundException;
 import com.hotel.obelisk.exceptions.UserNotFoundException;
 import com.hotel.obelisk.model.Reservation;
-import com.hotel.obelisk.model.Role;
 import com.hotel.obelisk.model.Room;
 import com.hotel.obelisk.model.User;
 import com.hotel.obelisk.repository.ReservationRepository;
@@ -18,7 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-import javax.validation.Valid;
+
 import java.time.LocalDate;
 import java.util.Optional;
 
